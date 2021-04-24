@@ -15,7 +15,8 @@ async def symbol_loop(exchange, symbol):
     while True:
         try:
             orderbook = await exchange.fetch_order_book(symbol)
-            now = exchange.milliseconds()
+            # 时间是否是绝对的时间，增加回调函数，交易所的时间是有差的, 考虑手续费
+            now = exchange.milliseconds()  # 不为绝对的时间，此处为交易所的时间
             print(exchange.iso8601(now), exchange.id, symbol, orderbook['asks'][0], orderbook['bids'][0])
 
             # --------------------> DO YOUR LOGIC HERE <------------------
@@ -38,9 +39,12 @@ async def exchange_loop(asyncio_loop, exchange_id, symbols):
 
 async def main(asyncio_loop):
     exchanges = {
-        'okex': ['BTC/USDT', 'ETH/BTC', 'ETH/USDT'],
-        'binance': ['BTC/USDT', 'ETH/BTC'],
-        'bitfinex': ['BTC/USDT'],
+        # 'okex': ['BTC/USDT', 'ETH/BTC', 'ETH/USDT'],
+        # 'binance': ['BTC/USDT', 'ETH/BTC'],
+        # 'bitfinex': ['BTC/USDT'],
+        # 'okex': ['ETH/USDT'],
+        'binance': ['ETH/USDT'],
+        'bitfinex': ['ETH/USDT'],
     }
     loops = [exchange_loop(asyncio_loop, exchange_id, symbols) for exchange_id, symbols in exchanges.items()]
     await gather(*loops)
