@@ -15,7 +15,7 @@ async def main(symbol):
     # this way you request rate will never hit the limit of an exchange
     # the library will throttle your requests to avoid that
 
-    exchange = ccxt.binance({
+    exchange = ccxt.kraken({
         'enableRateLimit': True,  # this option enables the built-in rate limiter
     })
     while True:
@@ -24,6 +24,7 @@ async def main(symbol):
         # this can be any call instead of fetch_ticker, really
         try:
             ticker = await exchange.fetch_ticker(symbol)
+            # time interval is 3 seconds for kraken
             print(exchange.iso8601(exchange.milliseconds()), 'fetched', symbol, 'ticker from', exchange.name)
             print(ticker)
         except ccxt.RequestTimeout as e:

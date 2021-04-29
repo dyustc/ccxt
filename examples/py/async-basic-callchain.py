@@ -26,7 +26,7 @@ async def run_all_exchanges(exchange_ids):
         print('Exchange:', exchange_id)
 
         print(exchange_id, 'symbols:')
-        markets = await load_markets(exchange, symbol)  # ←----------- STEP 1
+        markets = await load_markets(exchange)  # ←----------- STEP 1
         print(list(markets.keys()))
 
         print(symbol, 'ticker:')
@@ -44,7 +44,7 @@ async def run_all_exchanges(exchange_ids):
     return results
 
 
-async def load_markets(exchange, symbol):
+async def load_markets(exchange):
     try:
         result = await exchange.load_markets()
         return result
@@ -72,7 +72,7 @@ async def fetch_orderbook(exchange, symbol):
 
 
 if __name__ == '__main__':
-    exchange_ids = ['bitfinex', 'okex', 'exmo']
+    exchange_ids = ['kraken']
     exchanges = []
     results = asyncio.get_event_loop().run_until_complete(run_all_exchanges(exchange_ids))
     print([(exchange_id, ticker) for exchange_id, ticker in results.items()])

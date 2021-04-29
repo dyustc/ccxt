@@ -13,7 +13,7 @@ async def main():
     print("main结束")
     # 当执行某协程遇到IO操作时，会自动化切换执行其他任务。
     # 此处的await是等待相对应的协程全都执行完毕并获取结果
-    ret1 = await task1
+    ret1 = await func()
     ret2 = await task2
     print(ret1)
     print(ret2)

@@ -11,12 +11,15 @@ import ccxt.async_support as ccxt  # noqa: E402
 
 
 async def main():
-    exchange = ccxt.binance({
+    exchange = ccxt.kraken({
         'enableRateLimit': True,  # required by the Manual
     })
-    for i in range(0, 100):
+    for i in range(0, 2):
         # this can be any call instead of fetch_ticker, really
-        print(await exchange.fetch_ticker('ETH/BTC'))
+        # 这里似乎有并发，没有需要task, 但是test_17.py里头没有并发，可能sleep函数有特殊性
+        # await asyncio.sleep(2)
+        # await asyncio.sleep(2)
+        print(await exchange.fetch_ticker('ETH/USDT'))
     await exchange.close()
 
 

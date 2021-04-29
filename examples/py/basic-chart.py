@@ -2,7 +2,7 @@
 
 import os
 import sys
-from asciichartpy import plot
+from asciichart import plot
 
 # -----------------------------------------------------------------------------
 

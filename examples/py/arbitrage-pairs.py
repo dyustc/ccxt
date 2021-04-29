@@ -72,7 +72,7 @@ if len(sys.argv) > 2:
         exchanges[id] = exchange
 
         # load all markets from the exchange
-        markets = exchange.load_markets()
+        # markets = exchange.load_markets()
 
         # basic round-robin proxy scheduler
         currentProxy = -1
@@ -119,7 +119,6 @@ if len(sys.argv) > 2:
     table = []
     dump(green(' symbol          | ' + ''.join([' {:<15} | '.format(id) for id in ids])))
     dump(green(''.join(['-----------------+-' for x in range(0, len(ids) + 1)])))
-
     for symbol in arbitrableSymbols:
         string = ' {:<15} | '.format(symbol)
         row = {}
@@ -127,6 +126,6 @@ if len(sys.argv) > 2:
             # if a symbol is present on a exchange print that exchange's id in the row
             string += ' {:<15} | '.format(id if symbol in exchanges[id].symbols else '')
         dump(string)
-
+    print(len(arbitrableSymbols))
 else:
     print_usage()

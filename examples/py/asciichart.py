@@ -3,6 +3,7 @@
 # This file is a copied implementation from my asciichart repository on GitHub
 # https://github.com/kroitor/asciichart
 
+# Note: Terminal print, ignored now
 from math import cos
 # from math import sin
 from math import pi

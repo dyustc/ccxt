@@ -11,17 +11,17 @@ import ccxt.async_support as ccxt  # noqa: E402
 
 
 async def poll():
-    exchange = ccxt.poloniex({
+    exchange = ccxt.kraken({
         'enableRateLimit': True,
         # don't remove this line or they might ban you: https://github.com/ccxt/ccxt/wiki/Manual#rate-limit
     })
     while True:
-        yield await exchange.fetch_ticker('ETH/BTC')
+        print(await exchange.fetch_ticker('ETH/USDT'))
 
 
-async def main():
-    async for ticker in poll():
-        print(ticker)
+# async def main():
+#     async for ticker in poll():
+#         print(ticker)
 
 
-asyncio.get_event_loop().run_until_complete(main())
+asyncio.get_event_loop().run_until_complete(poll())

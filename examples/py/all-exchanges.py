@@ -14,9 +14,12 @@ print('CCXT Version:', ccxt.__version__)
 
 for exchange_id in ccxt.exchanges:
     try:
+        # Note: where is the ccxt.py？ ccxt.exchanges in the __init__.py
         exchange = getattr(ccxt, exchange_id)()
         print(exchange_id)
         # do what you want with this exchange
-        # pprint(dir(exchange))
+        if exchange_id == 'kraken':
+            pprint(dir(exchange))
+            pprint(getattr(exchange, 'id'))
     except Exception as e:
         print(e)
